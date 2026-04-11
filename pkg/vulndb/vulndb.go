@@ -20,6 +20,7 @@ type Exploit struct {
 	MaxKernel    string   `json:"max_kernel"`
 	Arch         []string `json:"arch"`
 	Source       string   `json:"source"`
+	Binary       string   `json:"binary,omitempty"`
 	Compile      string   `json:"compile"`
 	Execute      string   `json:"execute"`
 	Requirements []string `json:"requirements"`
