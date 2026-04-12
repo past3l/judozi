@@ -1,65 +1,101 @@
 <div align="center">
 
-```
-    __________-------____                 ____-------__________
-              \------____-------___--__---------__--___-------____------/
-               \//////// / / / / / \   _-------_   / \ \ \ \ \ \\\\\\\\/
-                 \////-/-/------/_/_| /___   ___\ |_\_\------\-\-\\\\/
-                   --//// / /  /  //|| (O)\ /(O) ||\\  \  \ \ \\\\--
-                        ---__/  // /| \_  /V\  _/ |\ \\  \__---
-                             -//  / /\_ ------- _/\ \  \\-
-                               \_/_/ /\---------/\ \_\_/
-                                   ----\   |   /----
-                                        | -|- |
-                                       /   |   \
-                                       ---- \___|
-```
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=KEXPLOIT&fontSize=70&fontAlignY=35&animation=twinkling&fontColor=fff&desc=Automated%20Linux%20Kernel%20Privilege%20Escalation%20Framework&descAlignY=55&descSize=18" />
 
-# 🦉 Kexploit
+<p align="center">
+  <img src="https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go&logoColor=white&labelColor=1a1a1a" />
+  <img src="https://img.shields.io/badge/Platform-Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black&labelColor=1a1a1a" />
+  <img src="https://img.shields.io/badge/License-Educational-E74C3C?style=for-the-badge&labelColor=1a1a1a" />
+  <img src="https://img.shields.io/badge/Library-Dynamic-00D9FF?style=for-the-badge&labelColor=1a1a1a" />
+</p>
 
-### **Automated Linux Kernel Exploit Detection & Privilege Escalation**
+<p align="center">
+  <img src="https://img.shields.io/badge/🔥%20Zero%20Dependencies-5.3MB%20Binary-FF6B6B?style=flat-square&labelColor=1a1a1a" />
+  <img src="https://img.shields.io/badge/⚡%20Hybrid%20Mode-Compile%20%7C%20Binary-4ECDC4?style=flat-square&labelColor=1a1a1a" />
+  <img src="https://img.shields.io/badge/🎯%20Smart%20Detection-Auto%20Match-95E1D3?style=flat-square&labelColor=1a1a1a" />
+  <img src="https://img.shields.io/badge/🛡️%20Kernel%20Range-2.6.22%20→%206.7.1-F38181?style=flat-square&labelColor=1a1a1a" />
+</p>
 
-*Zero-dependency static binary that auto-detects vulnerable kernels and executes exploits*
+<h3 align="center">
+  <a href="#-features">Features</a>
+  <span> • </span>
+  <a href="#-quick-start">Installation</a>
+  <span> • </span>
+  <a href="#-usage">Usage</a>
+  <span> • </span>
+  <a href="#-exploit-database">Exploits</a>
+  <span> • </span>
+  <a href="#-how-it-works">How It Works</a>
+</h3>
 
-[![Go](https://img.shields.io/badge/Go-1.22-00ADD8?style=flat&logo=go)](https://go.dev)
-[![License](https://img.shields.io/badge/License-Educational-red?style=flat)](LICENSE)
-[![Exploits](https://img.shields.io/badge/Exploits-23-green?style=flat)](#-exploit-database)
-[![Platform](https://img.shields.io/badge/Platform-Linux-blue?style=flat)](https://kernel.org)
+<br/>
 
-[Features](#-features) • [Installation](#-quick-start) • [Usage](#-usage) • [Exploits](#-exploit-database) • [How It Works](#-how-it-works)
-
----
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6,11,20&height=2" />
 
 </div>
 
-## 🎯 Features
+## FEATURES
+
+<div align="center">
 
 <table>
 <tr>
-<td width="50%">
+<td width="50%" align="center">
 
-### 🔥 Core Features
-- **Zero Dependencies** → Single 5.3MB static binary
-- **23 Kernel Exploits** → 2.6.22 to 6.7.1 coverage
-- **Smart Detection** → Auto-detects vulnerable kernels
-- **Hybrid Execution** → Compiles from source OR uses precompiled binaries
-- **GCC-Free Mode** → Works on systems without compiler
+### CORE CAPABILITIES
+
+```diff
++ Zero Dependencies
+  Single 5.3MB static binary
+
++ Dynamic Exploit Library
+  Kernel 2.6.22 → 6.7.1 coverage
+
++ Smart Detection Engine
+  Auto-detects vulnerable kernels
+
++ Hybrid Execution
+  Compile OR precompiled binaries
+
++ GCC-Free Mode
+  Works without compiler
+```
 
 </td>
-<td width="50%">
+<td width="50%" align="center">
 
-### ⚡ Advanced Features  
-- **Interactive Menu** → Clean terminal UI with exploit selection
-- **Auto Mode** → Try all matching exploits automatically
-- **Binary Fallback** → Downloads precompiled binaries when GCC unavailable
-- **Custom Mirrors** → Use your own exploit sources
-- **Educational** → Transparent, auditable, open source
+### ADVANCED FEATURES
+
+```diff
+! Interactive Menu System
+  Clean terminal UI
+
+! Automatic Mode
+  Try all exploits sequentially
+
+! Binary Fallback
+  Download precompiled when needed
+
+! Custom Mirrors
+  Your own exploit sources
+
+! Educational Framework
+  Transparent, auditable, open source
+```
 
 </td>
 </tr>
 </table>
 
-## 🚀 Quick Start
+</div>
+
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12,20,6&height=2" />
+
+</div>
+
+## QUICK START
 
 ### One-Line Installation
 
@@ -76,7 +112,13 @@ CGO_ENABLED=0 go build -ldflags="-s -w" -o kexploit .
 ./kexploit
 ```
 
-## 📖 Usage
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20,6,12&height=2" />
+
+</div>
+
+## USAGE
 
 ### Interactive Mode (Recommended)
 
@@ -131,16 +173,31 @@ CGO_ENABLED=0 go build -ldflags="-s -w" -o kexploit .
 ./kexploit -no-cleanup
 ```
 
-## 💾 Exploit Database
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6,12,20&height=2" />
+
+</div>
+
+## DYNAMIC EXPLOIT LIBRARY
+
+<div align="center">
+
+<sub>Constantly updated repository of kernel privilege escalation vulnerabilities</sub>
+
+</div>
 
 <table>
+<thead>
 <tr>
-<th>CVE</th>
-<th>Name</th>
-<th>Kernel Range</th>
-<th>Architecture</th>
-<th>Tags</th>
+<th><img src="https://img.shields.io/badge/CVE-ID-FF6B6B?style=flat-square" /></th>
+<th><img src="https://img.shields.io/badge/Name-Exploit-4ECDC4?style=flat-square" /></th>
+<th><img src="https://img.shields.io/badge/Kernel-Range-95E1D3?style=flat-square" /></th>
+<th><img src="https://img.shields.io/badge/Arch-Support-F38181?style=flat-square" /></th>
+<th><img src="https://img.shields.io/badge/Tags-Category-AA96DA?style=flat-square" /></th>
 </tr>
+</thead>
+<tbody>
 
 <tr><td><code>CVE-2024-1086</code></td><td>nf_tables UAF</td><td>3.15.0 → 6.7.1</td><td>amd64</td><td>nftables, uaf</td></tr>
 <tr><td><code>CVE-2023-3269</code></td><td>StackRot</td><td>6.1.0 → 6.4.0</td><td>amd64</td><td>maple-tree, uaf</td></tr>
@@ -162,62 +219,110 @@ CGO_ENABLED=0 go build -ldflags="-s -w" -o kexploit .
 <tr><td><code>CVE-2016-5195</code></td><td><strong>DirtyCow</strong></td><td>2.6.22 → 4.8.2</td><td>amd64, arm64</td><td>cow, race-condition</td></tr>
 <tr><td><code>CVE-2016-0728</code></td><td>Keyring Refcount</td><td>3.8.0 → 4.4.0</td><td>amd64</td><td>keyring, refcount</td></tr>
 
-<tr><td colspan="5" align="center"><strong>+ 4 more exploits</strong> → Use <code>./kexploit -list</code> to view all</td></tr>
+<tr><td colspan="5" align="center">
+<br/>
+<img src="https://img.shields.io/badge/➕%20More%20Exploits%20Available-Use%20--list%20flag-00D9FF?style=for-the-badge&labelColor=1a1a1a" />
+<br/><br/>
+</td></tr>
+</tbody>
 </table>
 
-## ⚙️ How It Works
+<div align="center">
 
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12,6,20&height=2" />
+
+</div>
+
+## HOW IT WORKS
+
+<div align="center">
+
+<table>
+<tr>
+<td>
+
+```ascii
+╔═══════════════════════════════════════════════════════════════╗
+║               KEXPLOIT EXECUTION PIPELINE                     ║
+╠═══════════════════════════════════════════════════════════════╣
+║                                                               ║
+║  [1] KERNEL DETECTION                                         ║
+║      ├─ Read /proc/version                                    ║
+║      ├─ Parse kernel version (5.15.0-1102-azure)              ║
+║      └─ Detect architecture (amd64)                           ║
+║                                                               ║
+║  [2] VULNERABILITY MATCHING                                   ║
+║      ├─ Load embedded exploit database                        ║
+║      ├─ Compare kernel version against ranges                 ║
+║      └─ Filter by architecture compatibility                  ║
+║                                                               ║
+║  [3] SMART EXECUTION (Hybrid Mode)                            ║
+║      │                                                         ║
+║      ├─ IF gcc available:                                     ║
+║      │   ├─ Download source code from GitHub                 ║
+║      │   ├─ Compile with system GCC                          ║
+║      │   └─ Execute compiled binary                          ║
+║      │                                                         ║
+║      └─ IF gcc NOT available:                                 ║
+║          ├─ Download precompiled static binary               ║
+║          ├─ Verify file integrity                            ║
+║          └─ Execute precompiled binary                       ║
+║                                                               ║
+║  [4] PRIVILEGE ESCALATION                                     ║
+║      ├─ Run exploit attempt                                   ║
+║      ├─ Monitor for success indicators                        ║
+║      └─ Drop to root shell (if successful)                   ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                      KEXPLOIT WORKFLOW                          │
-└─────────────────────────────────────────────────────────────────┘
 
-  1️⃣  KERNEL DETECTION
-      ├─ Read /proc/version
-      ├─ Parse kernel version (5.15.0-1102-azure)
-      └─ Detect architecture (amd64)
+</td>
+</tr>
+</table>
 
-  2️⃣  VULNERABILITY MATCHING  
-      ├─ Load embedded exploit database (23 CVEs)
-      ├─ Compare kernel version against ranges
-      └─ Filter by architecture compatibility
-
-  3️⃣  SMART EXECUTION (Hybrid Mode)
-      │
-      ├─ IF gcc available:
-      │   ├─ Download source code from GitHub
-      │   ├─ Compile with system GCC
-      │   └─ Execute compiled binary
-      │
-      └─ IF gcc NOT available:
-          ├─ Download precompiled static binary from repo
-          ├─ Verify file integrity
-          └─ Execute precompiled binary
-
-  4️⃣  PRIVILEGE ESCALATION
-      ├─ Run exploit attempt
-      ├─ Monitor for success indicators
-      └─ Drop to root shell (if successful)
-```
+</div>
 
 ### Binary Fallback System
 
+<div align="center">
+
+<table>
+<tr>
+<td>
+
 When GCC is not available, kexploit automatically downloads **precompiled static binaries** from GitHub:
 
-```bash
-[!] GCC not available, downloading precompiled binary
-[*] Downloading from https://raw.githubusercontent.com/past3l/kexploit/main/binaries/CVE-2024-1086
-[+] Binary downloaded successfully (166KB)
-[*] Executing: /tmp/kexploit-3332438770/CVE-2024-1086
+```diff
+! GCC not available, downloading precompiled binary
++ Downloading from https://raw.githubusercontent.com/.../CVE-2024-1086
++ Binary downloaded successfully (166KB)
++ Executing: /tmp/kexploit-3332438770/CVE-2024-1086
 ```
 
-All precompiled binaries are:
-- ✅ **Statically linked** (no library dependencies)
-- ✅ **Stripped** (smaller file size)
-- ✅ **Open source** (compiled from public exploit code)
-- ✅ **Verified** (checksums in repository)
+</td>
+</tr>
+</table>
 
-## 🏗️ Project Structure
+</div>
+
+All precompiled binaries are:
+
+<div align="center">
+
+<img src="https://img.shields.io/badge/✓%20Statically%20Linked-No%20Dependencies-4ECDC4?style=flat-square&labelColor=1a1a1a" />
+<img src="https://img.shields.io/badge/✓%20Stripped-Smaller%20Size-95E1D3?style=flat-square&labelColor=1a1a1a" />
+<img src="https://img.shields.io/badge/✓%20Open%20Source-Public%20Code-F38181?style=flat-square&labelColor=1a1a1a" />
+<img src="https://img.shields.io/badge/✓%20Verified-Checksums%20Available-AA96DA?style=flat-square&labelColor=1a1a1a" />
+
+</div>
+
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20,12,6&height=2" />
+
+</div>
+
+## PROJECT STRUCTURE
 
 ```
 kexploit/
@@ -240,9 +345,31 @@ kexploit/
 └── README.md                   # This file
 ```
 
-## 🧪 Real-World Testing
+<div align="center">
 
-**Successfully tested on Azure Container (Production Environment):**
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6,20,12&height=2" />
+
+</div>
+
+## REAL-WORLD TESTING
+
+<div align="center">
+
+<table>
+<tr>
+<td align="center">
+
+**Successfully tested on Azure Container (Production Environment)**
+
+<img src="https://img.shields.io/badge/Environment-Azure%20Container-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white&labelColor=1a1a1a" />
+<img src="https://img.shields.io/badge/Kernel-5.15.0--1102--azure-FCC624?style=for-the-badge&logo=linux&logoColor=black&labelColor=1a1a1a" />
+<img src="https://img.shields.io/badge/Status-Success-00D9FF?style=for-the-badge&labelColor=1a1a1a" />
+
+</td>
+</tr>
+</table>
+
+</div>
 
 ```bash
 nextjs@container:/tmp$ uname -r
@@ -261,38 +388,89 @@ nextjs@container:/tmp$ ./kexploit
 [*] creating network namespace (CLONE_NEWNET)...
 ```
 
-✅ Binary fallback system works flawlessly  
-✅ Zero-dependency execution confirmed  
-✅ Automatic exploit detection successful  
+<div align="center">
 
-## ⚠️ Security & Legal Notice
+<img src="https://img.shields.io/badge/✓%20Binary%20Fallback-Works%20Flawlessly-4ECDC4?style=flat-square&labelColor=1a1a1a" />
+<img src="https://img.shields.io/badge/✓%20Zero%20Dependencies-Confirmed-95E1D3?style=flat-square&labelColor=1a1a1a" />
+<img src="https://img.shields.io/badge/✓%20Auto%20Detection-Successful-F38181?style=flat-square&labelColor=1a1a1a" />
+
+</div>  
 
 <div align="center">
 
-### 🔴 **FOR EDUCATIONAL USE ONLY** 🔴
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12,20,6&height=2" />
+
+</div>
+
+## SECURITY & LEGAL NOTICE
+
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=24&height=100&section=header&text=FOR%20EDUCATIONAL%20USE%20ONLY&fontSize=30&fontColor=fff&animation=fadeIn" />
 
 </div>
 
 This tool is designed **exclusively** for:
-- 🎓 Security research and education
-- 🔐 Authorized penetration testing  
-- 🏆 CTF competitions and security training
-- 📚 Understanding kernel vulnerability exploitation
+
+<div align="center">
+
+<img src="https://img.shields.io/badge/Security%20Research-Education-4ECDC4?style=for-the-badge&labelColor=1a1a1a" />
+<img src="https://img.shields.io/badge/Authorized-Penetration%20Testing-95E1D3?style=for-the-badge&labelColor=1a1a1a" />
+<img src="https://img.shields.io/badge/CTF-Competitions-F38181?style=for-the-badge&labelColor=1a1a1a" />
+<img src="https://img.shields.io/badge/Understanding-Vulnerabilities-AA96DA?style=for-the-badge&labelColor=1a1a1a" />
+
+</div>
 
 **YOU MUST HAVE EXPLICIT PERMISSION** to use this tool on any system.
 
 #### Legal Responsibilities
 
-- ✅ **Allowed**: Testing your own systems
-- ✅ **Allowed**: Authorized penetration testing engagements
-- ✅ **Allowed**: Educational research and learning
-- ❌ **ILLEGAL**: Unauthorized access to computer systems
-- ❌ **ILLEGAL**: Using on systems you don't own
-- ❌ **ILLEGAL**: Malicious intent or unauthorized privilege escalation
+<div align="center">
 
-**The author is not responsible for misuse of this tool. Use responsibly and ethically.**
+<table>
+<tr>
+<td width="50%" align="center">
 
-## 🛠️ Building from Source
+**ALLOWED**
+
+```diff
++ Testing your own systems
++ Authorized pentesting
++ Educational research
++ CTF competitions
+```
+
+</td>
+<td width="50%" align="center">
+
+**ILLEGAL**
+
+```diff
+- Unauthorized access
+- Systems you don't own
+- Malicious intent
+- Illegal privilege escalation
+```
+
+</td>
+</tr>
+</table>
+
+</div>
+
+<div align="center">
+
+<img src="https://img.shields.io/badge/⚠️%20WARNING-Author%20Not%20Responsible%20for%20Misuse-E74C3C?style=for-the-badge&labelColor=1a1a1a" />
+
+</div>
+
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20,6,12&height=2" />
+
+</div>
+
+## BUILDING FROM SOURCE
 
 ### Prerequisites
 
@@ -320,7 +498,21 @@ CGO_ENABLED=0 go build -o kexploit-debug .
 - `-ldflags="-s -w"` → Strip debug symbols (smaller size)
 - `-o kexploit` → Output filename
 
-## 🤝 Contributing
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6,12,20&height=2" />
+
+</div>
+
+## CONTRIBUTING
+
+<div align="center">
+
+<img src="https://img.shields.io/badge/Contributions-Welcome-00D9FF?style=for-the-badge&labelColor=1a1a1a" />
+<img src="https://img.shields.io/badge/Pull%20Requests-Open-4ECDC4?style=for-the-badge&labelColor=1a1a1a" />
+<img src="https://img.shields.io/badge/Issues-Report%20Bugs-F38181?style=for-the-badge&labelColor=1a1a1a" />
+
+</div>
 
 Contributions are welcome! Here's how you can help:
 
@@ -351,23 +543,92 @@ Contributions are welcome! Here's how you can help:
 
 ### Reporting Issues
 
-- 🐛 Bug reports: [GitHub Issues](https://github.com/past3l/kexploit/issues)
-- 💡 Feature requests: [GitHub Discussions](https://github.com/past3l/kexploit/discussions)
-- 🔒 Security issues: Contact privately
+<div align="center">
 
-## 📜 License
+<table>
+<tr>
+<td align="center" width="33%">
+
+**Bug Reports**
+
+[GitHub Issues](https://github.com/past3l/kexploit/issues)
+
+<img src="https://img.shields.io/badge/Bugs-Report-FF6B6B?style=flat-square&labelColor=1a1a1a" />
+
+</td>
+<td align="center" width="33%">
+
+**Feature Requests**
+
+[GitHub Discussions](https://github.com/past3l/kexploit/discussions)
+
+<img src="https://img.shields.io/badge/Ideas-Discuss-4ECDC4?style=flat-square&labelColor=1a1a1a" />
+
+</td>
+<td align="center" width="33%">
+
+**Security Issues**
+
+Contact privately
+
+<img src="https://img.shields.io/badge/Security-Private-95E1D3?style=flat-square&labelColor=1a1a1a" />
+
+</td>
+</tr>
+</table>
+
+</div>
+
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12,20,6&height=2" />
+
+</div>
+
+## LICENSE
+
+<div align="center">
+
+<img src="https://img.shields.io/badge/License-Educational%20Use%20Only-E74C3C?style=for-the-badge&labelColor=1a1a1a" />
+<img src="https://img.shields.io/badge/Sources-Public%20Repositories-00D9FF?style=for-the-badge&labelColor=1a1a1a" />
+
+</div>
 
 **Educational Use Only**
 
 This project is provided for educational and research purposes. Exploit code belongs to the original authors and researchers. See individual exploit references for specific licensing.
 
-All exploit sources are publicly available from:
+<div align="center">
+
+<table>
+<tr>
+<td align="center">
+
+**Exploit Sources**
+
+</td>
+</tr>
+<tr>
+<td>
+
 - https://github.com/ (various researchers)
 - https://www.exploit-db.com/
 - Google Project Zero
 - Security research publications
 
-## 👤 Author
+</td>
+</tr>
+</table>
+
+</div>
+
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20,6,12&height=2" />
+
+</div>
+
+## AUTHOR
 
 **past3l** @ [mileniumsec](https://github.com/past3l)
 
@@ -377,30 +638,68 @@ All exploit sources are publicly available from:
 
 ## 🙏 Credits & Acknowledgments
 
+<div align="center">
+
+<img src="https://img.shields.io/badge/Thanks%20To-Security%20Researchers-FF6B6B?style=for-the-badge&labelColor=1a1a1a" />
+<img src="https://img.shields.io/badge/Powered%20By-Open%20Source-4ECDC4?style=for-the-badge&labelColor=1a1a1a" />
+
+</div>
+
 Special thanks to:
-- **Original Exploit Authors** → Security researchers who discovered and disclosed these vulnerabilities
+
+<table>
+<tr>
+<td width="50%">
+
+**Research Organizations**
+
 - **Google Project Zero** → Advanced kernel security research
 - **Qualys Security** → Sequoia and other critical discoveries
-- **Linux Kernel Community** → Rapid patching and security improvements
-- **Exploit-DB** → Public exploit database and resources
-- **The Go Team** → Excellent static binary compilation support
+- **Linux Kernel Community** → Rapid patching and improvements
+- **Exploit-DB** → Public exploit database
+- **The Go Team** → Static binary compilation support
 
-### Notable Researchers
+</td>
+<td width="50%">
+
+**Notable Researchers**
 
 - **@Notselwyn** - CVE-2024-1086 (nf_tables UAF)
 - **@firefart** - CVE-2016-5195 (DirtyCow)
 - **Max Kellermann** - CVE-2022-0847 (DirtyPipe)
 - **@lrh2000** - CVE-2023-3269 (StackRot)
-- And many others in the security research community
+- And many others in the security community
 
----
+</td>
+</tr>
+</table>
+
+<br/>
 
 <div align="center">
 
-**⚡ Remember: With great power comes great responsibility ⚡**
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=150&section=footer" />
 
-*Use this tool ethically and legally. Always obtain proper authorization.*
+<table>
+<tr>
+<td align="center">
 
-Made with 🦉 by **past3l** | [Star ⭐ this repo](https://github.com/past3l/kexploit) if you find it useful!
+<h3>With great power comes great responsibility</h3>
+
+<sub>Use this tool ethically and legally. Always obtain proper authorization.</sub>
+
+<br/><br/>
+
+<img src="https://img.shields.io/github/stars/past3l/kexploit?style=social" />
+<img src="https://img.shields.io/github/forks/past3l/kexploit?style=social" />
+<img src="https://img.shields.io/github/watchers/past3l/kexploit?style=social" />
+
+<br/><br/>
+
+**Made by past3l** | [Star this repo](https://github.com/past3l/kexploit) if you find it useful
+
+</td>
+</tr>
+</table>
 
 </div>
