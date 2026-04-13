@@ -29,7 +29,7 @@ func (r *ReconModule) Run(args []string) error {
 
 	fs := flag.NewFlagSet("recon", flag.ContinueOnError)
 	listFlag := fs.Bool("list", false, "List all techniques")
-	outDir   := fs.String("dir", ".", "Directory to save output files")
+	outDir   := fs.String("dir", "recon", "Directory to save output files")
 	noSave   := fs.Bool("nosave", false, "Don't save files, print to stdout")
 	if err := fs.Parse(args); err != nil {
 		return err
@@ -44,6 +44,12 @@ func (r *ReconModule) Run(args []string) error {
 
 	timestamp := time.Now().Format("20060102_150405")
 	remaining := fs.Args()
+
+	if !*noSave {
+		if err := os.MkdirAll(*outDir, 0700); err != nil {
+			return fmt.Errorf("cannot create output dir %s: %w", *outDir, err)
+		}
+	}
 
 	if len(remaining) > 0 {
 		for _, arg := range remaining {
