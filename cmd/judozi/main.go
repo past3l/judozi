@@ -11,6 +11,7 @@ import (
 
 	"github.com/judozi/judozi/modules/kernel"
 	"github.com/judozi/judozi/modules/persistence"
+	"github.com/judozi/judozi/modules/recon"
 	"github.com/judozi/judozi/pkg/module"
 	"github.com/judozi/judozi/pkg/shell"
 	"github.com/judozi/judozi/pkg/ui"
@@ -21,6 +22,7 @@ func main() {
 	
 	registry.Register(kernel.New())
 	registry.Register(persistence.New())
+	registry.Register(recon.New())
 	
 	ui.ShowBanner()
 	
