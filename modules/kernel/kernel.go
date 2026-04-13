@@ -114,7 +114,16 @@ func (k *KernelModule) Run(args []string) error {
 		}
 	}
 
-	runExploits(selected, *mirror, *noCleanup)
+	gotRoot := runExploits(selected, *mirror, *noCleanup)
+	if gotRoot {
+		fmt.Println()
+		ui.Success("Root access obtained! You can now:")
+		ui.Info("• Run 'use persistence' to establish persistence")
+		ui.Info("• Continue using Judozi framework")
+		ui.Info("• Execute system commands directly")
+		fmt.Println()
+	}
+	
 	return nil
 }
 
@@ -173,7 +182,7 @@ func interactiveSelect(matches []vulndb.Exploit) []vulndb.Exploit {
 	return []vulndb.Exploit{matches[idx-1]}
 }
 
-func runExploits(exploits []vulndb.Exploit, mirror string, noCleanup bool) {
+func runExploits(exploits []vulndb.Exploit, mirror string, noCleanup bool) bool {
 	for i, e := range exploits {
 		fmt.Println()
 		output.Info("Attempting exploit %s[%d/%d]%s: %s%s%s (%s)",
@@ -188,9 +197,10 @@ func runExploits(exploits []vulndb.Exploit, mirror string, noCleanup bool) {
 		if exploit.IsRoot() {
 			output.Success("Privilege escalation successful!")
 			output.RootBanner()
-			os.Exit(0)
+			return true // Return true instead of exit
 		}
 	}
 
 	output.Error("All exploits failed")
+	return false
 }

@@ -10,7 +10,9 @@ import (
 	"strings"
 
 	"github.com/judozi/judozi/modules/kernel"
+	"github.com/judozi/judozi/modules/persistence"
 	"github.com/judozi/judozi/pkg/module"
+	"github.com/judozi/judozi/pkg/shell"
 	"github.com/judozi/judozi/pkg/ui"
 )
 
@@ -18,8 +20,7 @@ func main() {
 	// Initialize module registry
 	registry := module.NewRegistry()
 	
-	// Register available modules
-	registry.Register(kernel.New())
+	registry.Register(persistence.New())
 	
 	// Show banner
 	ui.ShowBanner()
@@ -37,6 +38,12 @@ func main() {
 			listModules(registry)
 			return
 		}
+		if moduleName == "-s" || moduleName == "--shell" {
+			// Start interactive shell
+			sh := shell.NewShell(registry)
+			sh.Start()
+			return
+		}
 		
 		// Try to run the specified module
 		mod, err := registry.Get(moduleName)
@@ -52,10 +59,26 @@ func main() {
 			ui.Error("Module execution failed: %v", err)
 			os.Exit(1)
 		}
-		return
-	}
-	
-	// Interactive module selection
+		
+		// After module execution, drop to shell if root
+		if os.Getuid() == 0 {
+			fmt.Println()
+			ui.Info("Entering interactive shell...")
+			sh := shel"  judozi --shell              # Start interactive shell")
+	fmt.Println()
+	fmt.Println(ui.Bold + ui.Cyan + "GLOBAL FLAGS:" + ui.Reset)
+	fmt.Println("  -l, --list     List all available modules")
+	fmt.Println("  -s, --shell    Start interactive shell")
+	fmt.Println("  -h, --help     Show this help message")
+	fmt.Println()
+	fmt.Println(ui.Bold + ui.Cyan + "EXAMPLES:" + ui.Reset)
+	fmt.Println("  judozi                    # Interactive module selection + shell")
+	fmt.Println("  judozi --shell            # Direct to interactive shell")
+	fmt.Println("  judozi kernel             # Run kernel module + shell")
+	fmt.Println("  judozi kernel -list       # List all kernel exploits")
+	fmt.Println("  judozi kernel -auto       # Auto-exploit mode")
+	fmt.Println("  judozi persistence        # Run persistence module")
+	fmt.Println("  judozi persistence -list  # List persistence techniques
 	selectAndRun(registry)
 }
 
@@ -73,9 +96,17 @@ func showHelp(registry *module.Registry) {
 	fmt.Println("  judozi kernel -list       # List all kernel exploits")
 	fmt.Println("  judozi kernel -auto       # Auto-exploit mode")
 	fmt.Println()
-	listModules(registry)
-}
-
+	li// Show recommendation badge
+			recommendation := ""
+			if mod.Category() == "persistence" && os.Getuid() == 0 {
+				recommendation = ui.Yellow + ui.Bold + " [⚡ RECOMMENDED - You have root!]" + ui.Reset
+			} else if mod.Category() == "persistence" && os.Getuid() != 0 {
+				recommendation = ui.Dim + " [Requires root access]" + ui.Reset
+			}
+			
+			fmt.Printf("  %s%-15s%s  %s%s\n",
+				ui.Yellow+ui.Bold, mod.Name(), ui.Reset,
+				mod.Description(), recommendation
 func listModules(registry *module.Registry) {
 	modules := registry.List()
 	
@@ -125,6 +156,14 @@ func selectAndRun(registry *module.Registry) {
 	
 	fmt.Println(ui.Dim + "  ╔════════════════════════════════════════════════════════════════════╗")
 	fmt.Println("  ║ " + ui.Reset + "Enter module number (1-" + fmt.Sprint(len(modules)) + ") or 'q' to quit" + ui.Dim + "                        ║")
+	
+	// After module execution, drop to shell
+	fmt.Println()
+	ui.Info("Entering interactive shell. Type %shelp%s for commands.", ui.Yellow+ui.Bold, ui.Reset)
+	fmt.Println()
+	
+	sh := shell.NewShell(registry)
+	sh.Start()
 	fmt.Println("  ╚════════════════════════════════════════════════════════════════════╝" + ui.Reset)
 	fmt.Print("  > ")
 	
