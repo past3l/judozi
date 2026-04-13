@@ -2,9 +2,7 @@ package techniques
 
 import (
 	"fmt"
-	"io/fs"
 	"os"
-	"path/filepath"
 	"strings"
 	"syscall"
 )
@@ -15,6 +13,91 @@ func NewSUIDSGID() Technique         { return &SUIDSGIDEnum{} }
 func (s *SUIDSGIDEnum) Name() string         { return "SUID/SGID Binaries" }
 func (s *SUIDSGIDEnum) Description() string  { return "All SUID/SGID binaries, capabilities, writable paths" }
 func (s *SUIDSGIDEnum) StealthLevel() string { return "low" }
+
+func (s *SUIDSGIDEnum) Run() string {
+	var b strings.Builder
+
+	b.WriteString("[+] SUID BINARIES\n")
+	suidOut := cmd("find / -perm -4000 -type f -not -path '/proc/*' -not -path '/sys/*' -not -path '/dev/*' -not -path '/run/*' 2>/dev/null")
+	b.WriteString(suidOut)
+	b.WriteString("\n")
+
+	b.WriteString("[+] SGID BINARIES\n")
+	b.WriteString(cmd("find / -perm -2000 -type f -not -path '/proc/*' -not -path '/sys/*' -not -path '/dev/*' -not -path '/run/*' 2>/dev/null | head -40"))
+	b.WriteString("\n")
+
+	b.WriteString("[+] FILE CAPABILITIES\n")
+	b.WriteString(cmd("getcap -r / 2>/dev/null"))
+	b.WriteString("\n")
+
+	b.WriteString("[+] INTERESTING SUID BINS (GTFOBins candidates)\n")
+	gtfoBins := []string{
+		"bash", "dash", "sh", "ksh", "csh", "tcsh", "zsh",
+		"find", "vim", "vi", "nmap", "awk", "gawk", "nawk", "man",
+		"less", "more", "perl", "python", "python3", "ruby", "lua",
+		"php", "cc", "gcc", "g++", "tar", "zip", "unzip", "ar",
+		"cpio", "rsync", "cp", "mv", "scp", "dd", "tee", "cat",
+		"head", "tail", "cut", "base64", "base32",
+		"openssl", "curl", "wget", "git", "env", "sudo", "doas",
+		"pkexec", "newgrp", "passwd", "chsh", "chfn",
+		"strace", "ltrace", "gdb", "screen", "tmux",
+		"docker", "podman", "lxc", "kubectl",
+		"mount", "umount", "nsenter", "unshare", "ionice", "nice",
+		"chroot", "systemctl", "journalctl", "service",
+	}
+	for _, line := range strings.Split(suidOut, "\n") {
+		line = strings.TrimSpace(line)
+		if line == "" {
+			continue
+		}
+		for _, g := range gtfoBins {
+			if strings.HasSuffix(line, "/"+g) || line == g {
+				b.WriteString(fmt.Sprintf("  *** GTFOBIN: %s\n", line))
+				break
+			}
+		}
+	}
+	b.WriteString("\n")
+
+	b.WriteString("[+] WRITABLE DIRECTORIES IN PATH\n")
+	pathVal := os.Getenv("PATH")
+	for _, p := range strings.Split(pathVal, ":") {
+		fi, err := os.Stat(p)
+		if err != nil {
+			continue
+		}
+		if fi.Mode().Perm()&0002 != 0 {
+			b.WriteString(fmt.Sprintf("  *** WORLD-WRITABLE PATH: %s\n", p))
+		} else if isWritable(p) {
+			b.WriteString(fmt.Sprintf("  *** WRITABLE BY CURRENT USER: %s\n", p))
+		}
+	}
+	b.WriteString("\n")
+
+	b.WriteString("[+] SUDO NOPASSWD\n")
+	b.WriteString(cmd("sudo -l 2>/dev/null | grep -i 'nopasswd'"))
+	b.WriteString("\n")
+
+	b.WriteString("[+] POLKIT / PKEXEC VERSION\n")
+	b.WriteString(cmd("pkexec --version 2>/dev/null || dpkg -l policykit-1 2>/dev/null | tail -1 || rpm -q polkit 2>/dev/null"))
+	b.WriteString("\n")
+
+	b.WriteString("[+] WRITABLE SENSITIVE FILES\n")
+	for _, sf := range []string{"/etc/passwd", "/etc/shadow", "/etc/sudoers"} {
+		if isWritable(sf) {
+			b.WriteString(fmt.Sprintf("  *** %s IS WRITABLE!\n", sf))
+		} else {
+			b.WriteString(fmt.Sprintf("  %s — not writable\n", sf))
+		}
+	}
+	b.WriteString("\n")
+
+	return b.String()
+}
+
+func isWritable(path string) bool {
+	return syscall.Access(path, syscall.O_WRONLY) == nil
+}
 
 func (s *SUIDSGIDEnum) Run() string {
 	var b strings.Builder

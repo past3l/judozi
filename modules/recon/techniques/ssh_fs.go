@@ -72,11 +72,11 @@ func (f *FSWritable) Run() string {
 	var b strings.Builder
 
 	b.WriteString("[+] WORLD-WRITABLE DIRECTORIES\n")
-	b.WriteString(cmd("find / -not -path '/proc/*' -not -path '/sys/*' -not -path '/dev/*' -perm -0002 -type d 2>/dev/null | head -40"))
+	b.WriteString(cmd("find / -not -path '/proc/*' -not -path '/sys/*' -not -path '/dev/*' -not -path '/run/*' -perm -0002 -type d 2>/dev/null | head -30"))
 	b.WriteString("\n")
 
 	b.WriteString("[+] WORLD-WRITABLE FILES (non-symlink)\n")
-	b.WriteString(cmd("find / -not -path '/proc/*' -not -path '/sys/*' -not -path '/dev/*' -perm -0002 -type f 2>/dev/null | head -40"))
+	b.WriteString(cmd("find / -not -path '/proc/*' -not -path '/sys/*' -not -path '/dev/*' -not -path '/run/*' -perm -0002 -type f 2>/dev/null | head -30"))
 	b.WriteString("\n")
 
 	b.WriteString("[+] SENSITIVE FILES CHECK\n")
@@ -103,7 +103,7 @@ func (f *FSWritable) Run() string {
 	b.WriteString("\n")
 
 	b.WriteString("[+] BACKUP FILES\n")
-	b.WriteString(cmd("find / \\( -name '*.bak' -o -name '*.backup' -o -name '*.old' -o -name '*.orig' -o -name '*.save' \\) -readable 2>/dev/null | head -30"))
+	b.WriteString(cmd("find /home /root /var /opt /etc /srv -maxdepth 8 \\( -name '*.bak' -o -name '*.backup' -o -name '*.old' -o -name '*.orig' -o -name '*.save' \\) -readable 2>/dev/null | head -20"))
 	b.WriteString("\n")
 
 	b.WriteString("[+] INTERESTING FILES IN /var\n")
