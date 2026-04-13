@@ -144,20 +144,20 @@ Run Judozi and select a module interactively:
     ▓██▄██▓ ▓▓█  ░██░ ░▓█▄   ▌▒██   ██░  ▄▀▒   ░░██░
      ▓███▒  ▒▒█████▓  ░▒████▓ ░ ████▓▒░▒███████▒░██░
 
-  ┌─────────────────────────────────────────────────────────────────────────┐
-  │  Modular Offensive Security Framework v2.0                              │
-  │  Author: past3l@mileniumsec                                              │
-  │  GitHub: github.com/past3l/judozi                                        │
-  └─────────────────────────────────────────────────────────────────────────┘
+  ┌────────────────────────────────────────────────┐
+  │  Modular Offensive Security Framework v2.0    │
+  │  Author: past3l@mileniumsec                   │
+  │  GitHub: github.com/past3l/judozi             │
+  └────────────────────────────────────────────────┘
 
 SELECT MODULE:
 
   [1] kernel
       privesc - Automated Linux Kernel Privilege Escalation
 
-  ╔════════════════════════════════════════════════════════════════════╗
-  ║ Enter module number (1) or 'q' to quit                            ║
-  ╚════════════════════════════════════════════════════════════════════╝
+  ╔════════════════════════════════════════╗
+  ║ Enter number (1-N) or 'q' to quit    ║
+  ╚════════════════════════════════════════╝
   > 
 ```
 
@@ -344,89 +344,30 @@ Automated Linux kernel privilege escalation framework with 19+ exploits.
 
 ## HOW IT WORKS
 
-<div align="center">
-
-<table>
-<tr>
-<td>
-
-```ascii
-╔═══════════════════════════════════════════════════════════════╗
-║               JUDOZI FRAMEWORK PIPELINE                       ║
-╠═══════════════════════════════════════════════════════════════╣
-║                                                               ║
-║  [1] FRAMEWORK INITIALIZATION                                 ║
-║      ├─ Load module registry                                  ║
-║      ├─ Auto-discover available modules                       ║
-║      └─ Initialize UI system                                  ║
-║                                                               ║
-║  [2] MODULE SELECTION                                         ║
-║      ├─ Interactive: Display module menu                      ║
-║      ├─ Direct: Parse command-line module name                ║
-║      └─ Validate module availability                          ║
-║                                                               ║
-║  [3] MODULE EXECUTION                                         ║
-║      ├─ Load selected module                                  ║
-║      ├─ Pass arguments to module                              ║
-║      └─ Execute module.Run()                                  ║
-║                                                               ║
-║  [4] KERNEL MODULE WORKFLOW (Example)                         ║
-║      ├─ Detect kernel version and architecture                ║
-║      ├─ Search exploit database                               ║
-║      ├─ Match vulnerabilities                                 ║
-║      ├─ Compile or download exploits                          ║
-║      └─ Execute and gain privileges                           ║
-║                                                               ║
-╚═══════════════════════════════════════════════════════════════╝
 ```
-
-</td>
-</tr>
-</table>
-
-</div>
-
-### Binary Fallback System
-
-<div align="center">
-
-<table>
-<tr>
-<td>
-
-Whencmd/
-│   └── judozi/
-│       └── main.go              # Main entry point with module selection
-├── modules/
-│   └── kernel/                  # Kernel privilege escalation module
-│       ├── kernel.go           # Module implementation
-│       ├── binaries/           # Precompiled exploit binaries (19)
-│       │   ├── CVE-2024-1086
-│       │   ├── CVE-2022-0847
-│       │   └── ...
-│       └── pkg/
-│           ├── exploit/        # Exploit execution logic
-│           ├── kernel/         # Kernel version detection
-│           ├── output/         # Colored output helpers
-│           └── vulndb/         # Exploit database
-│               ├── exploits.json  # CVE metadata
-│               └── vulndb.go
-├── pkg/
-│   ├── module/                 # Module interface and registry
-│   │   └── module.go
-│   └── ui/                     # Terminal UI framework
-│       └── banner.go
-├── go.mod
-└── README.md
+╔════════════════════════════════════════════╗
+║       JUDOZI FRAMEWORK PIPELINE           ║
+╠════════════════════════════════════════════╣
+║                                            ║
+║  [1] INIT                                  ║
+║      ├─ Load module registry               ║
+║      ├─ Auto-discover modules              ║
+║      └─ Initialize UI                      ║
+║                                            ║
+║  [2] MODULE SELECTION                      ║
+║      ├─ Interactive menu                   ║
+║      ├─ Direct CLI execution               ║
+║      └─ Validate availability              ║
+║                                            ║
+║  [3] EXECUTION                             ║
+║      ├─ Load selected module               ║
+║      ├─ Pass arguments                     ║
+║      └─ Execute module.Run()               ║
+║                                            ║
+╚════════════════════════════════════════════╝
 ```
 
 ### Architecture
-
-**Modular Design:**
-- Each module implements the `Module` interface
-- Registry system for auto-discovery
-- Independent module execution
-- Shared UI components
 
 **Module Interface:**
 ```go
@@ -436,12 +377,13 @@ type Module interface {
     Category() string
     Run(args []string) error
 }
+```
+
 <div align="center">
 
 <img src="https://img.shields.io/badge/✓%20Statically%20Linked-No%20Dependencies-4ECDC4?style=flat-square&labelColor=1a1a1a" />
-<img src="https://img.shields.io/badge/✓%20Stripped-Smaller%20Size-95E1D3?style=flat-square&labelColor=1a1a1a" />
+<img src="https://img.shields.io/badge/✓%20Stripped-Smaller%20Binary-95E1D3?style=flat-square&labelColor=1a1a1a" />
 <img src="https://img.shields.io/badge/✓%20Open%20Source-Public%20Code-F38181?style=flat-square&labelColor=1a1a1a" />
-<img src="https://img.shields.io/badge/✓%20Verified-Checksums%20Available-AA96DA?style=flat-square&labelColor=1a1a1a" />
 
 </div>
 
@@ -455,23 +397,19 @@ type Module interface {
 
 ```
 judozi/
-├── main.go                      # CLI entry point & interactive menu
-├── judozi                       # Precompiled static binary (5.3MB)
-├── binaries/                    # Precompiled exploit binaries (17)
-│   ├── CVE-2024-1086           # nf_tables UAF (166KB)
-│   ├── CVE-2023-3269           # StackRot (38KB)
-│   ├── CVE-2022-0847           # DirtyPipe (806KB)
-│   └── ...
+├── cmd/judozi/main.go       # Entry point, module registry
+├── modules/
+│   ├── kernel/              # Kernel privesc (19 CVEs)
+│   ├── persistence/         # 8 persistence techniques
+│   └── recon/               # 12 recon techniques
+│       └── techniques/
 ├── pkg/
-│   ├── kernel/                 # Kernel version detection & parsing
-│   ├── vulndb/                 # Exploit database (exploits.json)
-│   │   ├── exploits.json      # 23 CVE metadata & sources
-│   │   └── vulndb.go          # Database loader & search
-│   ├── exploit/                # Download, compile, execute logic
-│   │   └── exploit.go         # Binary fallback implementation
-│   └── output/                 # Colored terminal output
-│       └── output.go          # Banner, info, success, error helpers
-└── README.md                   # This file
+│   ├── module/              # Module interface + registry
+│   ├── shell/               # Interactive shell
+│   └── ui/                  # Terminal UI helpers
+├── binaries/                # Precompiled exploit binaries
+├── go.mod
+└── README.md
 ```
 
 <div align="center">
