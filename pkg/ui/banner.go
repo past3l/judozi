@@ -1,0 +1,81 @@
+package ui
+
+import "fmt"
+
+const (
+	Reset   = "\033[0m"
+	Red     = "\033[31m"
+	Green   = "\033[32m"
+	Yellow  = "\033[33m"
+	Blue    = "\033[34m"
+	Magenta = "\033[35m"
+	Cyan    = "\033[36m"
+	White   = "\033[37m"
+	Bold    = "\033[1m"
+	Dim     = "\033[2m"
+)
+
+func ShowBanner() {
+	fmt.Print(Cyan + Bold)
+	fmt.Println(`
+     ▄▄▄██▀▀▀█    ██  ▓█████▄  ▒█████   ▒███████▒ ██▓
+       ▒██   ██  ▓██▒ ▒██▀ ██▌▒██▒  ██▒▒ ▒ ▒ ▄▀░▓██▒
+       ░██  ▓██  ▒██░ ░██   █▌▒██░  ██▒░ ▒ ▄▀▒░ ▒██▒
+    ▓██▄██▓ ▓▓█  ░██░ ░▓█▄   ▌▒██   ██░  ▄▀▒   ░░██░
+     ▓███▒  ▒▒█████▓  ░▒████▓ ░ ████▓▒░▒███████▒░██░
+     ▒▓▒▒░  ░▒▓▒ ▒ ▒   ▒▒▓  ▒ ░ ▒░▒░▒░ ░▒▒ ▓░▒░▒░▓  
+     ▒ ░▒░  ░░▒░ ░ ░   ░ ▒  ▒   ░ ▒ ▒░ ░░▒ ▒ ░ ▒ ▒ ░
+     ░ ░ ░   ░░░ ░ ░   ░ ░  ░ ░ ░ ░ ▒  ░ ░ ░ ░ ░ ▒ ░
+     ░   ░     ░         ░        ░ ░    ░ ░     ░  
+                       ░               ░            `)
+	fmt.Println(Reset)
+	fmt.Println(Dim + "    ┌─────────────────────────────────────────────────────────────────────────┐")
+	fmt.Println("    │" + Reset + Magenta + "  Modular Offensive Security Framework v2.0" + Dim + "                           │")
+	fmt.Println("    │" + Reset + Yellow + "  Author: " + Reset + White + "past3l@mileniumsec" + Dim + "                                          │")
+	fmt.Println("    │" + Reset + Blue + "  GitHub: " + Reset + Cyan + "github.com/past3l/judozi" + Dim + "                                       │")
+	fmt.Println("    │                                                                         │")
+	fmt.Println("    └─────────────────────────────────────────────────────────────────────────┘" + Reset)
+	fmt.Println()
+}
+
+func Info(format string, a ...any) {
+	fmt.Printf(Cyan+"[*] "+Reset+format+"\n", a...)
+}
+
+func Success(format string, a ...any) {
+	fmt.Printf(Green+Bold+"[+] "+Reset+Green+format+Reset+"\n", a...)
+}
+
+func Error(format string, a ...any) {
+	fmt.Printf(Red+"[-] "+Reset+format+"\n", a...)
+}
+
+func Warn(format string, a ...any) {
+	fmt.Printf(Yellow+"[!] "+Reset+format+"\n", a...)
+}
+
+func ModuleHeader(name, category, description string) {
+	fmt.Println()
+	fmt.Println(Cyan + Bold + "╔══════════════════════════════════════════════════════════════════════════════╗" + Reset)
+	fmt.Printf(Cyan+Bold+"║  "+Reset+Magenta+Bold+"Module: "+Reset+Yellow+"%s"+Reset, name)
+	spaces := 67 - len(name)
+	for i := 0; i < spaces; i++ {
+		fmt.Print(" ")
+	}
+	fmt.Println(Cyan + Bold + "║" + Reset)
+	fmt.Printf(Cyan+Bold+"║  "+Reset+Dim+"Category: "+Reset+White+"%s"+Reset, category)
+	spaces = 64 - len(category)
+	for i := 0; i < spaces; i++ {
+		fmt.Print(" ")
+	}
+	fmt.Println(Cyan + Bold + "║" + Reset)
+	fmt.Println(Cyan + Bold + "╠══════════════════════════════════════════════════════════════════════════════╣" + Reset)
+	fmt.Printf(Cyan+Bold+"║  "+Reset+"%s", description)
+	spaces = 75 - len(description)
+	for i := 0; i < spaces; i++ {
+		fmt.Print(" ")
+	}
+	fmt.Println(Cyan + Bold + "║" + Reset)
+	fmt.Println(Cyan + Bold + "╚══════════════════════════════════════════════════════════════════════════════╝" + Reset)
+	fmt.Println()
+}

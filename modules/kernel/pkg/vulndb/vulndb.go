@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/judozi/judozi/pkg/kernel"
+	"github.com/judozi/judozi/modules/kernel/pkg/kernel"
 )
 
 //go:embed exploits.json
