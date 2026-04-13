@@ -1,3 +1,3 @@
-module github.com/kexploit/kexploit
+module github.com/judozi/judozi
 
 go 1.22

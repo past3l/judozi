@@ -10,10 +10,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/kexploit/kexploit/pkg/exploit"
-	"github.com/kexploit/kexploit/pkg/kernel"
-	"github.com/kexploit/kexploit/pkg/output"
-	"github.com/kexploit/kexploit/pkg/vulndb"
+	"github.com/judozi/judozi/pkg/exploit"
+	"github.com/judozi/judozi/pkg/kernel"
+	"github.com/judozi/judozi/pkg/output"
+	"github.com/judozi/judozi/pkg/vulndb"
 )
 
 func main() {

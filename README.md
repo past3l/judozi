@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=KEXPLOIT&fontSize=70&fontAlignY=35&animation=twinkling&fontColor=fff&desc=Automated%20Linux%20Kernel%20Privilege%20Escalation%20Framework&descAlignY=55&descSize=18" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=JUDOZI&fontSize=70&fontAlignY=35&animation=twinkling&fontColor=fff&desc=Automated%20Linux%20Kernel%20Privilege%20Escalation%20Framework&descAlignY=55&descSize=18" />
 
 <p align="center">
   <img src="https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go&logoColor=white&labelColor=1a1a1a" />
@@ -100,16 +100,16 @@
 ### One-Line Installation
 
 ```bash
-wget https://github.com/past3l/kexploit/raw/main/kexploit && chmod +x kexploit && ./kexploit
+wget https://github.com/past3l/judozi/raw/main/judozi && chmod +x judozi && ./judozi
 ```
 
 ### Alternative: Build from Source
 
 ```bash
-git clone https://github.com/past3l/kexploit.git
-cd kexploit
-CGO_ENABLED=0 go build -ldflags="-s -w" -o kexploit .
-./kexploit
+git clone https://github.com/past3l/judozi.git
+cd judozi
+CGO_ENABLED=0 go build -ldflags="-s -w" -o judozi .
+./judozi
 ```
 
 <div align="center">
@@ -123,7 +123,7 @@ CGO_ENABLED=0 go build -ldflags="-s -w" -o kexploit .
 ### Interactive Mode (Recommended)
 
 ```bash
-./kexploit
+./judozi
 ```
 
 <details>
@@ -158,19 +158,19 @@ CGO_ENABLED=0 go build -ldflags="-s -w" -o kexploit .
 
 ```bash
 # List all available exploits
-./kexploit -list
+./judozi -list
 
 # Target specific CVE
-./kexploit -cve CVE-2022-0847
+./judozi -cve CVE-2022-0847
 
 # Automatic mode (try all matching exploits)
-./kexploit -auto
+./judozi -auto
 
 # Use custom exploit mirror
-./kexploit -mirror https://example.com/exploits
+./judozi -mirror https://example.com/exploits
 
 # Disable cleanup after execution
-./kexploit -no-cleanup
+./judozi -no-cleanup
 ```
 
 <div align="center">
@@ -243,7 +243,7 @@ CGO_ENABLED=0 go build -ldflags="-s -w" -o kexploit .
 
 ```ascii
 ╔═══════════════════════════════════════════════════════════════╗
-║               KEXPLOIT EXECUTION PIPELINE                     ║
+║               JUDOZI EXECUTION PIPELINE                       ║
 ╠═══════════════════════════════════════════════════════════════╣
 ║                                                               ║
 ║  [1] KERNEL DETECTION                                         ║
@@ -290,13 +290,13 @@ CGO_ENABLED=0 go build -ldflags="-s -w" -o kexploit .
 <tr>
 <td>
 
-When GCC is not available, kexploit automatically downloads **precompiled static binaries** from GitHub:
+When GCC is not available, judozi automatically downloads **precompiled static binaries** from GitHub:
 
 ```diff
 ! GCC not available, downloading precompiled binary
 + Downloading from https://raw.githubusercontent.com/.../CVE-2024-1086
 + Binary downloaded successfully (166KB)
-+ Executing: /tmp/kexploit-3332438770/CVE-2024-1086
++ Executing: /tmp/judozi-3332438770/CVE-2024-1086
 ```
 
 </td>
@@ -325,9 +325,9 @@ All precompiled binaries are:
 ## PROJECT STRUCTURE
 
 ```
-kexploit/
+judozi/
 ├── main.go                      # CLI entry point & interactive menu
-├── kexploit                     # Precompiled static binary (5.3MB)
+├── judozi                       # Precompiled static binary (5.3MB)
 ├── binaries/                    # Precompiled exploit binaries (17)
 │   ├── CVE-2024-1086           # nf_tables UAF (166KB)
 │   ├── CVE-2023-3269           # StackRot (38KB)
@@ -375,7 +375,7 @@ kexploit/
 nextjs@container:/tmp$ uname -r
 5.15.0-1102-azure
 
-nextjs@container:/tmp$ ./kexploit
+nextjs@container:/tmp$ ./judozi
 [*] Kernel: 5.15.0
 [+] Found 10 potential exploit(s)
   > all
@@ -481,22 +481,22 @@ This tool is designed **exclusively** for:
 
 ```bash
 # Standard build (static binary)
-CGO_ENABLED=0 go build -ldflags="-s -w" -o kexploit .
+CGO_ENABLED=0 go build -ldflags="-s -w" -o judozi .
 
 # Cross-compile for ARM64
-GOARCH=arm64 CGO_ENABLED=0 go build -ldflags="-s -w" -o kexploit-arm64 .
+GOARCH=arm64 CGO_ENABLED=0 go build -ldflags="-s -w" -o judozi-arm64 .
 
 # Cross-compile for 32-bit
-GOARCH=386 CGO_ENABLED=0 go build -ldflags="-s -w" -o kexploit-i386 .
+GOARCH=386 CGO_ENABLED=0 go build -ldflags="-s -w" -o judozi-i386 .
 
 # Debug build (with symbols)
-CGO_ENABLED=0 go build -o kexploit-debug .
+CGO_ENABLED=0 go build -o judozi-debug .
 ```
 
 ### Build flags explained:
 - `CGO_ENABLED=0` → Produce pure static binary
 - `-ldflags="-s -w"` → Strip debug symbols (smaller size)
-- `-o kexploit` → Output filename
+- `-o judozi` → Output filename
 
 <div align="center">
 
@@ -528,7 +528,7 @@ Contributions are welcome! Here's how you can help:
   "max_kernel": "X.X.X",
   "arch": ["amd64"],
   "source": "https://github.com/.../exploit.c",
-  "binary": "https://raw.githubusercontent.com/past3l/kexploit/main/binaries/CVE-XXXX-XXXXX",
+  "binary": "https://raw.githubusercontent.com/past3l/judozi/main/binaries/CVE-XXXX-XXXXX",
   "compile": "gcc -o {bin} {src} -static",
   "execute": "{bin}",
   "requirements": ["gcc"],
@@ -551,7 +551,7 @@ Contributions are welcome! Here's how you can help:
 
 **Bug Reports**
 
-[GitHub Issues](https://github.com/past3l/kexploit/issues)
+[GitHub Issues](https://github.com/past3l/judozi/issues)
 
 <img src="https://img.shields.io/badge/Bugs-Report-FF6B6B?style=flat-square&labelColor=1a1a1a" />
 
@@ -560,7 +560,7 @@ Contributions are welcome! Here's how you can help:
 
 **Feature Requests**
 
-[GitHub Discussions](https://github.com/past3l/kexploit/discussions)
+[GitHub Discussions](https://github.com/past3l/judozi/discussions)
 
 <img src="https://img.shields.io/badge/Ideas-Discuss-4ECDC4?style=flat-square&labelColor=1a1a1a" />
 
@@ -633,7 +633,7 @@ This project is provided for educational and research purposes. Exploit code bel
 **past3l** @ [mileniumsec](https://github.com/past3l)
 
 - GitHub: [@past3l](https://github.com/past3l)
-- Repository: [kexploit](https://github.com/past3l/kexploit)
+- Repository: [judozi](https://github.com/past3l/judozi)
 - Twitter: (if applicable)
 
 ## 🙏 Credits & Acknowledgments
@@ -690,13 +690,13 @@ Special thanks to:
 
 <br/><br/>
 
-<img src="https://img.shields.io/github/stars/past3l/kexploit?style=social" />
-<img src="https://img.shields.io/github/forks/past3l/kexploit?style=social" />
-<img src="https://img.shields.io/github/watchers/past3l/kexploit?style=social" />
+<img src="https://img.shields.io/github/stars/past3l/judozi?style=social" />
+<img src="https://img.shields.io/github/forks/past3l/judozi?style=social" />
+<img src="https://img.shields.io/github/watchers/past3l/judozi?style=social" />
 
 <br/><br/>
 
-**Made by past3l** | [Star this repo](https://github.com/past3l/kexploit) if you find it useful
+**Made by past3l** | [Star this repo](https://github.com/past3l/judozi) if you find it useful
 
 </td>
 </tr>
