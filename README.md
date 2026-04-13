@@ -218,22 +218,69 @@ Automated Linux kernel privilege escalation framework with 19+ exploits.
 - GCC-free mode with binary fallback
 - Range: Kernel 2.6.22 → 6.7.1
 
-**Usage:**
 ```bash
 ./judozi kernel          # Interactive mode
 ./judozi kernel -list    # List all exploits
 ./judozi kernel -auto    # Try all matching
+./judozi kernel -cve CVE-2022-0847
 ```
+
+---
+
+### 🔒 Persistence Module
+
+8 proven persistence techniques with stealth rating and reboot survival info.
+
+**Techniques:**
+- SSH authorized_keys injection
+- Cron reverse shell (every 10 min)
+- Systemd service (`system-monitor`)
+- Custom SUID binary
+- `/etc/ld.so.preload` shared lib injection
+- PAM auth bypass (magic password backdoor)
+- `.bashrc` / `.profile` injection
+- SUID bash copy
+
+```bash
+./judozi persistence         # Interactive selection
+./judozi persistence -list   # List all techniques
+./judozi persistence 3       # Install technique #3
+./judozi persistence -remove # Remove installed backdoors
+```
+
+---
+
+### 🔍 Recon Module
+
+12 parallel reconnaissance techniques. All output auto-saved to `./recon/` directory.
+
+**Techniques:**
+- System info (OS, CPU, memory, kernel, env, installed tools)
+- Network enumeration (interfaces, routes, ports, ARP, DNS, firewall rules)
+- User & group enumeration (sudoers, shadow, login history, dotfiles)
+- SUID/SGID binaries + GTFOBins detection
+- Process enumeration (cmdlines, root procs, env secrets)
+- Credential hunting (SSH keys, `.env`, config files, AWS/k8s creds)
+- Cron & scheduled tasks (crontab, systemd timers, at jobs)
+- Service enumeration (systemd, init.d, versions)
+- Container & Docker recon (socket, cgroups, namespaces, metadata service)
+- Environment secrets (env vars, `/proc` env, process cmdlines)
+- SSH & lateral movement (known_hosts, agent sockets, authorized_keys)
+- Filesystem (writable dirs/files, sensitive files, backup files, logs)
+
+```bash
+./judozi recon               # Run all 12 techniques in parallel → saves to ./recon/
+./judozi recon -list         # List techniques
+./judozi recon 1 4 7         # Run specific techniques by ID
+./judozi recon -dir /tmp     # Save to custom directory
+./judozi recon -nosave       # Print to stdout only
+```
+
+---
 
 ### 🚀 Coming Soon
 
-More modules are in development:
-
-- **web** - Web application exploitation toolkit
-- **network** - Network reconnaissance and exploitation
-- **container** - Container escape techniques
-- **persistence** - Persistence mechanisms
-- **recon** - System enumeration and discovery
+- **container** - Container escape techniques (Docker socket, cgroup v1, privileged, overlay)
 
 <div align="center">
 
