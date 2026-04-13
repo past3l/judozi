@@ -1,12 +1,12 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=JUDOZI&fontSize=70&fontAlignY=35&animation=twinkling&fontColor=fff&desc=Automated%20Linux%20Kernel%20Privilege%20Escalation%20Framework&descAlignY=55&descSize=18" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=JUDOZI&fontSize=70&fontAlignY=35&animation=twinkling&fontColor=fff&desc=Modular%20Offensive%20Security%20Framework&descAlignY=55&descSize=18" />
 
 <p align="center">
   <img src="https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go&logoColor=white&labelColor=1a1a1a" />
   <img src="https://img.shields.io/badge/Platform-Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black&labelColor=1a1a1a" />
+  <img src="https://img.shields.io/badge/Architecture-Modular-FF6B6B?style=for-the-badge&labelColor=1a1a1a" />
   <img src="https://img.shields.io/badge/License-Educational-E74C3C?style=for-the-badge&labelColor=1a1a1a" />
-  <img src="https://img.shields.io/badge/Library-Dynamic-00D9FF?style=for-the-badge&labelColor=1a1a1a" />
 </p>
 
 <p align="center">
@@ -42,45 +42,51 @@
 <tr>
 <td width="50%" align="center">
 
-### CORE CAPABILITIES
+### CORE FRAMEWORK
 
 ```diff
++ Modular Plugin System
+  Drop-in module support
+
++ Module Registry
+  Auto-discovery and loading
+
++ Interactive UI
+  Clean module selection menu
+
++ Command-line Interface
+  Direct module execution
+
++ Extensible Architecture
+  Easy to add new modules
+
 + Zero Dependencies
-  Single 5.3MB static binary
-
-+ Dynamic Exploit Library
-  Kernel 2.6.22 → 6.7.1 coverage
-
-+ Smart Detection Engine
-  Auto-detects vulnerable kernels
-
-+ Hybrid Execution
-  Compile OR precompiled binaries
-
-+ GCC-Free Mode
-  Works without compiler
+  Pure Go, static binary
 ```
 
 </td>
 <td width="50%" align="center">
 
-### ADVANCED FEATURES
+### KERNEL MODULE
 
 ```diff
-! Interactive Menu System
-  Clean terminal UI
+! Dynamic Exploit Library
+  Kernel 2.6.22 → 6.7.1 coverage
 
-! Automatic Mode
-  Try all exploits sequentially
+! Smart Detection
+  Auto-detects vulnerabilities
+
+! Hybrid Execution
+  Compile OR precompiled
+
+! GCC-Free Mode
+  Works without compiler
 
 ! Binary Fallback
-  Download precompiled when needed
+  Download when needed
 
-! Custom Mirrors
-  Your own exploit sources
-
-! Educational Framework
-  Transparent, auditable, open source
+! Automatic Mode
+  Try all exploits
 ```
 
 </td>
@@ -108,7 +114,7 @@ wget https://github.com/past3l/judozi/raw/main/judozi && chmod +x judozi && ./ju
 ```bash
 git clone https://github.com/past3l/judozi.git
 cd judozi
-CGO_ENABLED=0 go build -ldflags="-s -w" -o judozi .
+CGO_ENABLED=0 go build -ldflags="-s -w" -o judozi ./cmd/judozi
 ./judozi
 ```
 
@@ -122,60 +128,116 @@ CGO_ENABLED=0 go build -ldflags="-s -w" -o judozi .
 
 ### Interactive Mode (Recommended)
 
+Run Judozi and select a module interactively:
+
 ```bash
 ./judozi
 ```
 
 <details>
-<summary>📸 Click to see example output</summary>
+<summary>📸 Click to see module selection</summary>
 
 ```
-[*] Kernel: 5.15.0 (Linux version 5.15.0-1102-azure)
-[*] Arch:   amd64
-[+] Found 10 potential exploit(s):
+     ▄▄▄██▀▀▀█    ██  ▓█████▄  ▒█████   ▒███████▒ ██▓
+       ▒██   ██  ▓██▒ ▒██▀ ██▌▒██▒  ██▒▒ ▒ ▒ ▄▀░▓██▒
+       ░██  ▓██  ▒██░ ░██   █▌▒██░  ██▒░ ▒ ▄▀▒░ ▒██▒
+    ▓██▄██▓ ▓▓█  ░██░ ░▓█▄   ▌▒██   ██░  ▄▀▒   ░░██░
+     ▓███▒  ▒▒█████▓  ░▒████▓ ░ ████▓▒░▒███████▒░██░
 
-  [1] nf_tables Use-After-Free     CVE-2024-1086
-      Double-free in nft_verdict_init() allows arbitrary code execution
-      Kernel: 3.15.0 → 6.7.1  |  Tags: nftables, uaf
+  ┌─────────────────────────────────────────────────────────────────────────┐
+  │  Modular Offensive Security Framework v2.0                              │
+  │  Author: past3l@mileniumsec                                              │
+  │  GitHub: github.com/past3l/judozi                                        │
+  └─────────────────────────────────────────────────────────────────────────┘
 
-  [2] GameOver(lay)                CVE-2023-2640
-      Ubuntu OverlayFS permission bypass via setuid in user namespace
-      Kernel: 5.15.0 → 6.2.0  |  Tags: overlayfs, ubuntu, userns
+SELECT MODULE:
 
-  [9] DirtyPipe                    CVE-2022-0847
-      Overwrite arbitrary read-only files via pipe splice flag manipulation
-      Kernel: 5.8.0 → 5.16.10  |  Tags: pipe, write-anywhere
+  [1] kernel
+      privesc - Automated Linux Kernel Privilege Escalation
 
   ╔════════════════════════════════════════════════════════════════════╗
-  ║ Enter exploit number (1-10), 'all' to try all, or 'q' to quit ║
+  ║ Enter module number (1) or 'q' to quit                            ║
   ╚════════════════════════════════════════════════════════════════════╝
   > 
 ```
 
 </details>
 
+### Direct Module Execution
+
+Run a specific module directly:
+
+```bash
+# Run kernel module interactively
+./judozi kernel
+
+# List all kernel exploits
+./judozi kernel -list
+
+# Automatic mode (try all matching exploits)
+./judozi kernel -auto
+
+# Target specific CVE
+./judozi kernel -cve CVE-2022-0847
+
+# Use custom exploit mirror
+./judozi kernel -mirror https://example.com/exploits
+```
+
 ### Command Line Options
 
 ```bash
-# List all available exploits
-./judozi -list
+# List all available modules
+./judozi -l
+./judozi --list
 
-# Target specific CVE
-./judozi -cve CVE-2022-0847
+# Show help
+./judozi -h
+./judozi --help
 
-# Automatic mode (try all matching exploits)
-./judozi -auto
-
-# Use custom exploit mirror
-./judozi -mirror https://example.com/exploits
-
-# Disable cleanup after execution
-./judozi -no-cleanup
+# Run a module with args
+./judozi [module] [module-args]
 ```
 
 <div align="center">
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6,12,20&height=2" />
+
+</div>
+
+## MODULES
+
+### 🔓 Kernel Module (Privilege Escalation)
+
+Automated Linux kernel privilege escalation framework with 19+ exploits.
+
+**Features:**
+- Smart kernel version detection
+- Automatic exploit matching  
+- Hybrid execution (compile or precompiled)
+- GCC-free mode with binary fallback
+- Range: Kernel 2.6.22 → 6.7.1
+
+**Usage:**
+```bash
+./judozi kernel          # Interactive mode
+./judozi kernel -list    # List all exploits
+./judozi kernel -auto    # Try all matching
+```
+
+### 🚀 Coming Soon
+
+More modules are in development:
+
+- **web** - Web application exploitation toolkit
+- **network** - Network reconnaissance and exploitation
+- **container** - Container escape techniques
+- **persistence** - Persistence mechanisms
+- **recon** - System enumeration and discovery
+
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12,20,6&height=2" />
 
 </div>
 
@@ -243,35 +305,30 @@ CGO_ENABLED=0 go build -ldflags="-s -w" -o judozi .
 
 ```ascii
 ╔═══════════════════════════════════════════════════════════════╗
-║               JUDOZI EXECUTION PIPELINE                       ║
+║               JUDOZI FRAMEWORK PIPELINE                       ║
 ╠═══════════════════════════════════════════════════════════════╣
 ║                                                               ║
-║  [1] KERNEL DETECTION                                         ║
-║      ├─ Read /proc/version                                    ║
-║      ├─ Parse kernel version (5.15.0-1102-azure)              ║
-║      └─ Detect architecture (amd64)                           ║
+║  [1] FRAMEWORK INITIALIZATION                                 ║
+║      ├─ Load module registry                                  ║
+║      ├─ Auto-discover available modules                       ║
+║      └─ Initialize UI system                                  ║
 ║                                                               ║
-║  [2] VULNERABILITY MATCHING                                   ║
-║      ├─ Load embedded exploit database                        ║
-║      ├─ Compare kernel version against ranges                 ║
-║      └─ Filter by architecture compatibility                  ║
+║  [2] MODULE SELECTION                                         ║
+║      ├─ Interactive: Display module menu                      ║
+║      ├─ Direct: Parse command-line module name                ║
+║      └─ Validate module availability                          ║
 ║                                                               ║
-║  [3] SMART EXECUTION (Hybrid Mode)                            ║
-║      │                                                         ║
-║      ├─ IF gcc available:                                     ║
-║      │   ├─ Download source code from GitHub                 ║
-║      │   ├─ Compile with system GCC                          ║
-║      │   └─ Execute compiled binary                          ║
-║      │                                                         ║
-║      └─ IF gcc NOT available:                                 ║
-║          ├─ Download precompiled static binary               ║
-║          ├─ Verify file integrity                            ║
-║          └─ Execute precompiled binary                       ║
+║  [3] MODULE EXECUTION                                         ║
+║      ├─ Load selected module                                  ║
+║      ├─ Pass arguments to module                              ║
+║      └─ Execute module.Run()                                  ║
 ║                                                               ║
-║  [4] PRIVILEGE ESCALATION                                     ║
-║      ├─ Run exploit attempt                                   ║
-║      ├─ Monitor for success indicators                        ║
-║      └─ Drop to root shell (if successful)                   ║
+║  [4] KERNEL MODULE WORKFLOW (Example)                         ║
+║      ├─ Detect kernel version and architecture                ║
+║      ├─ Search exploit database                               ║
+║      ├─ Match vulnerabilities                                 ║
+║      ├─ Compile or download exploits                          ║
+║      └─ Execute and gain privileges                           ║
 ║                                                               ║
 ╚═══════════════════════════════════════════════════════════════╝
 ```
@@ -290,23 +347,48 @@ CGO_ENABLED=0 go build -ldflags="-s -w" -o judozi .
 <tr>
 <td>
 
-When GCC is not available, judozi automatically downloads **precompiled static binaries** from GitHub:
-
-```diff
-! GCC not available, downloading precompiled binary
-+ Downloading from https://raw.githubusercontent.com/.../CVE-2024-1086
-+ Binary downloaded successfully (166KB)
-+ Executing: /tmp/judozi-3332438770/CVE-2024-1086
+Whencmd/
+│   └── judozi/
+│       └── main.go              # Main entry point with module selection
+├── modules/
+│   └── kernel/                  # Kernel privilege escalation module
+│       ├── kernel.go           # Module implementation
+│       ├── binaries/           # Precompiled exploit binaries (19)
+│       │   ├── CVE-2024-1086
+│       │   ├── CVE-2022-0847
+│       │   └── ...
+│       └── pkg/
+│           ├── exploit/        # Exploit execution logic
+│           ├── kernel/         # Kernel version detection
+│           ├── output/         # Colored output helpers
+│           └── vulndb/         # Exploit database
+│               ├── exploits.json  # CVE metadata
+│               └── vulndb.go
+├── pkg/
+│   ├── module/                 # Module interface and registry
+│   │   └── module.go
+│   └── ui/                     # Terminal UI framework
+│       └── banner.go
+├── go.mod
+└── README.md
 ```
 
-</td>
-</tr>
-</table>
+### Architecture
 
-</div>
+**Modular Design:**
+- Each module implements the `Module` interface
+- Registry system for auto-discovery
+- Independent module execution
+- Shared UI components
 
-All precompiled binaries are:
-
+**Module Interface:**
+```go
+type Module interface {
+    Name() string
+    Description() string
+    Category() string
+    Run(args []string) error
+}
 <div align="center">
 
 <img src="https://img.shields.io/badge/✓%20Statically%20Linked-No%20Dependencies-4ECDC4?style=flat-square&labelColor=1a1a1a" />
@@ -486,22 +568,23 @@ CGO_ENABLED=0 go build -ldflags="-s -w" -o judozi .
 # Cross-compile for ARM64
 GOARCH=arm64 CGO_ENABLED=0 go build -ldflags="-s -w" -o judozi-arm64 .
 
+# Cross-compile for 32-bit/cmd/judozi
+
+# Cross-compile for ARM64
+GOARCH=arm64 CGO_ENABLED=0 go build -ldflags="-s -w" -o judozi-arm64 ./cmd/judozi
+
 # Cross-compile for 32-bit
-GOARCH=386 CGO_ENABLED=0 go build -ldflags="-s -w" -o judozi-i386 .
+GOARCH=386 CGO_ENABLED=0 go build -ldflags="-s -w" -o judozi-i386 ./cmd/judozi
 
 # Debug build (with symbols)
-CGO_ENABLED=0 go build -o judozi-debug .
+CGO_ENABLED=0 go build -o judozi-debug ./cmd/judozi
 ```
 
 ### Build flags explained:
 - `CGO_ENABLED=0` → Produce pure static binary
 - `-ldflags="-s -w"` → Strip debug symbols (smaller size)
 - `-o judozi` → Output filename
-
-<div align="center">
-
-<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6,12,20&height=2" />
-
+- `./cmd/judozi` → Entry point path
 </div>
 
 ## CONTRIBUTING
@@ -515,10 +598,50 @@ CGO_ENABLED=0 go build -o judozi-debug .
 </div>
 
 Contributions are welcome! Here's how you can help:
+Modules
 
+Create a new module by implementing the `Module` interface:
+
+```go
+package mymodule
+
+import "github.com/judozi/judozi/pkg/module"
+
+type MyModule struct{}
+
+func New() module.Module {
+    return &MyModule{}
+}
+
+func (m *MyModule) Name() string {
+    return "mymodule"
+}
+
+func (m *MyModule) Description() string {
+    return "My awesome module"
+}
+
+func (m *MyModule) Category() string {
+    return "exploitation"
+}
+
+func (m *MyModule) Run(args []string) error {
+    // Your module logic here
+    return nil
+}
+```
+
+Then register it in `cmd/judozi/main.go`:
+```go
+registry.Register(mymodule.New())
+```
+
+### Adding Kernel 
 ### Adding New Exploits
 
-1. Add exploit metadata to `pkg/vulndb/exploits.json`:
+### Adding Kernel Exploits
+
+1. Add exploit metadata to `modules/kernel/pkg/vulndb/exploits.json`:
 ```json
 {
   "id": "CVE-XXXX-XXXXX",
@@ -537,7 +660,7 @@ Contributions are welcome! Here's how you can help:
 }
 ```
 
-2. Compile static binary and add to `binaries/`
+2. Compile static binary and add to `modules/kernel/binaries/`
 3. Test on target kernel version
 4. Submit pull request
 
